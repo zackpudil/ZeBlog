@@ -1,0 +1,423 @@
+/*
+	ZeBlog
+	Author: Zachary Pudil
+	File: resources/css/base.css
+		style rules
+		for the header, main nav, side nav,
+		and footer elements 
+		of the page.
+*/
+body {
+	font-family: arial, sans-serif;
+	background-color: #C4FFCB;
+}
+
+.preheader {
+	margin: 0px;
+	margin-bottom: 10px;
+	padding: 0px;
+}
+
+.preheader p {
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
+}
+
+.preheader a {
+	text-decoration: none;
+	color: green;
+	font-size: 1.4em;
+}
+
+.header {
+	width: 997px;
+	height: 100px;
+	margin: auto;
+	margin-top: 0px;
+	padding: 0px;
+	color: green;
+	background-color: #00D419;
+
+	border-top-left-radius: 50px;
+	border-top-right-radius: 50px;
+
+	-moz-border-radius-topleft: 50px;
+	-moz-border-radius-topright: 50px;
+
+	border: 2px solid green;
+	border-bottom: 0px;
+
+	-webkit-box-shadow: 0px -2px 4px green;
+	-moz-box-shadow: 0px -2px 4px green;
+}
+
+.header h1 {
+	margin: 0px;
+	margin-top: 7px;
+	text-align: center;
+	font-size: 5em;
+}
+
+.navmenu {
+	width: 997px;
+	height: 40px;
+	
+	margin: auto;
+	margin-top: 0px;
+	padding: 0px;
+
+	background-color: #00D419;
+
+	border: 2px solid green;
+	border-bottom: 2px solid green;
+	border-top: 0px;
+}
+
+.navmenu ul {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+
+.navmenu ul li {
+	list-style: none;
+	text-align: center;
+	float: left;
+	width: 160px;
+	margin: 5px 1px 5px 1px;
+	color: green;
+
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-topleft: 10px;
+
+	-webkit-box-shadow: 0px 0px 5px green;
+	-moz-box-shadow: 0px 0px 5px green;
+}
+
+.navmenu ul li:hover, .navmenu ul li.selected {
+	padding: 0px 5px 0px 5px;
+	-webkit-box-shadow: 0px -3px 10px green;
+	-moz-box-shadow: 0px -3px 10px green;
+}
+
+.navmenu ul li a {
+	text-decoration: none;
+	font-size: 1.8em;
+	color: green;
+
+	padding: 0px 5px 0px 5px;
+}
+
+.content {
+	background-color: #D2FAD7;
+
+	width: 997px;
+	margin: auto;
+
+	border-right: 2px solid green;
+	border-left: 2px solid green;
+
+}
+
+.content .left {
+	clear: both;
+	width: 150px;
+
+	float: left;
+	margin: 0px;
+	margin-top: 20px;
+	margin-left: 7px;
+	padding: 0px;
+}
+
+.content .right {
+	width: 641px;
+	margin: 0px;
+	padding: 0px;
+
+	margin-left: 156px;
+}
+
+.navbox {
+	width: 73px;
+	height: 40px;
+	margin-top: 10px;
+	margin-left: 74px;
+
+	background-color: #00D419;
+
+	border: 2px solid green;
+
+	border-radius: 20px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+
+	-moz-border-radius: 20px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;
+
+	-webkit-box-shadow: 0px 0px 10px green;
+	-moz-box-shadow: 0px 0px 10px green;
+
+	text-align: center;
+}
+
+.navbox:hover, .navbox#selected {
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 2px;
+	width: 145px;
+}
+
+.navbox:hover a, .navbox#selected a {
+	display: block;
+}
+
+.navbox p {
+	color: green;
+	font-size: 2em;
+}
+
+.navbox a {
+	color: green;
+	text-decoration: none;
+	font-size: 2em;
+	display:none;
+}
+
+.infobox {
+	width: 800px;
+
+	background-color: #D9FCC7;
+	margin: auto;
+	margin-top: -5px;
+	margin-bottom: 8px;
+
+	padding: 0px 0px 15px 0px;
+
+	border: 3px solid green;
+	
+	-webkit-box-shadow: -4px -3px 4px gray;
+	-moz-box-shadow: -4px -3px 4px gray;
+}
+
+.infobox div {
+	margin-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+}
+
+.infobx hr {
+	height: 1px;
+	border: 1px solid green;
+}
+
+.infobox  label {
+	font-size: 1.8em;
+	text-align: center;
+	color: green;
+	font-weight: bold;
+}
+
+.infobox div h1 {
+	color: green;
+	text-align: center;
+}
+
+.infobox div h1 a {
+	color: green;
+	text-decoration: none;
+}
+
+.infobox div h1 a:hover {
+	text-decoration: underline;
+}
+
+.infobox div h2 {
+	color: green;
+}
+
+.infobox p.nav {
+	color: green;
+	font-size: 2.0em;
+}
+
+.infobox p.nav a {
+	color: green;
+	text-decoration: none;
+}
+
+.infobox .error {
+	color: red;
+}
+
+.infobox .blog {
+	color: green;
+	margin-top: 5px;
+	border: 2px solid green;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin-bottom: 50px;
+	padding: 10px;
+	font-weight: bold;
+	background-color: #D9FCAF;
+	-webkit-box-shadow: 10px 10px 5px #080;
+	-moz-box-shadow: 10px 10px 5px #080;
+}
+
+.infobox .blog p {
+	font-size: 1.3em;
+}
+
+.infobox .blog p.meta {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.infobox .blog h2 {
+	margin: 0px;
+}
+
+.infobox .blog h2 a {
+	text-decoration: none;
+	color: green;
+}
+
+.infobox .blog h2 a:hover {
+	text-decoration: underline;
+}
+
+.infobox .blog p.meta {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.infobox .mod {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: green;
+}
+
+.infobox .mod a {
+	color: green;
+}
+
+.infobox .blog p {
+	font-size: 1.3em;
+}
+
+.infobox .form {
+	color: green;
+	width: 700px;
+	margin: auto;
+	margin-top: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 15px;
+	border: 2px solid green;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+}
+
+.infobox .form input[type="submit"] {
+	background-color: #00FF00;
+	width: 190px;
+	color: green;
+	font-size: 2.0em;
+	border-radius: 30px;
+}
+
+.infobox .form input[type="text"], 
+.infobox	.form input[type="password"], 
+.infobox .form textarea {
+	background-color: #D9FCA7;
+	color: green;
+	font-size: 1.3em;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+.infobox .form fieldset {
+	border: 2px solid green;
+}
+
+.infobox .form fieldset legend {
+	font-size: 1.3em;
+}
+
+.infobox .form select {
+	font-size: 1.5em;
+	color: green;
+	background-color: #D9FCA7;
+}
+
+.infobox .form option {
+	color: green;
+	background-color: #D9FCA7;
+}
+
+.infobox .form #date_label {
+	font-size: 1.9em;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+.infobox .form #title {
+	margin-left: 13px;
+}
+
+.infobox .comment {
+	padding: 0px;
+	padding-left: 10px;
+	border: 3px solid green;	
+}
+
+.infobox .comment h3 {
+	text-align: center;
+	color: green;
+}
+
+.infobox .comment p {
+	font-size: 1.3em;
+	color: green;
+	font-weight: bold;
+}
+
+.infobox #auth-index p {
+	text-align: center;
+}
+
+.infobox #auth-index p a {
+	text-decoration: none;
+	font-size: 2em;
+	color: green;
+}
+.footer {
+	background-color: #00D419;
+	width: 997px;
+	height: 75px;
+	margin: auto;
+
+	border: 2px solid green;
+
+	border-bottom-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+	-moz-border-radius-bottomright: 50px;
+	-moz-border-radius-bottomleft: 50px;
+
+	-webkit-box-shadow: 0px 2px 2px green;
+	-moz-box-shadow: 0px 2px 2px green;
+}
+
+.footer p {
+	color: green;
+	text-align: center;
+}
+
+.footer p a {
+	color: green;
+	text-decoration: none;
+}

@@ -1,0 +1,79 @@
+.colorchooser {
+	position: absolute;
+	top: 0px; left: 0px;
+	z-index: 30px;
+}
+
+.colorchooser p {
+	margin: 0px;
+	padding: 0px;
+	color: #444;
+	background-color: #CCC;
+	font-size: 1.4em;
+	text-align: center;
+	width: 100px;
+}
+
+.colorchooser p.unclick {
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+
+	-moz-border-radius-bottomleft: 25px;
+	-moz-border-radius-bottomright: 25px;
+}
+
+.colorchooser p.click {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-bottom: 1px solid black;
+}
+
+.colorchooser p:hover {
+	cursor: pointer;
+	color: #CCC;
+	background-color: #444;
+}
+
+.colorchooser div {
+	display: none;
+}
+
+.colorchooser ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	background-color: #CCC;
+	
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	
+	-moz-border-radius-bottomleft: 25px;
+	-moz-border-radius-bottomright: 25px;
+}
+
+.colorchooser ul li {
+	font-size: 1.3em;
+	text-align: center;
+}
+
+.colorchooser ul li:hover {
+	cursor: pointer;
+	background-color: #333;
+}
+
+.colorchooser ul li#blue {
+	color: blue;
+}
+
+.colorchooser ul li#green {
+	color: green;
+}
+
+.colorchooser ul li:last-child {
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+
+	-moz-border-radius-bottomright: 25px;
+	-moz-border-radius-bottomleft: 25px;
+}
