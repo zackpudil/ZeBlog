@@ -70,6 +70,10 @@
 	color: green;
 }
 
+.colorchooser ul li#brown {
+	color: #663300;
+}
+
 .colorchooser ul li:last-child {
 	border-bottom-right-radius: 25px;
 	border-bottom-left-radius: 25px;

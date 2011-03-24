@@ -46,6 +46,7 @@
 				<ul>
 					<li id="green" onclick='changeColor(this.id)'>Green</li>
 					<li id="blue" onclick='changeColor(this.id)'>Blue</li>
+					<li id="brown" onclick='changeColor(this.id)'>Brown</li>
 				</ul>
 			</div>	
 		</div>
