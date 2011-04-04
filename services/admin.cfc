@@ -66,8 +66,10 @@
 			//since the database has referential integrity, having
 			//the cascade option doesn't work.  YOU HAVE TO DELETE THE
 			//CHILDREN BEFORE YOU KILL THE PARENT
-			for(var i = 1; i <= arrayLen(comments); i++) {
-				entityDelete(comments[i]);
+			if(isDefined("comments") && arrayLen(comments)) {
+				for(var i = 1; i <= arrayLen(comments); i++) {
+					entityDelete(comments[i]);
+				}
 			}
 			//flush the database after the comments are deleted.
 			ormflush();
