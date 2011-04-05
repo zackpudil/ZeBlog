@@ -14,7 +14,7 @@
 		<meta name="keywords" content="css, html, javascript, other stuff">
 		<title>ZeBLOG</title>
 		<link rel="stylesheet" type="text/css" href="includes/css/color.css">
-		<link rel="stylesheet" type="text/css" href="includes/css/#session.style#">
+		<link rel="stylesheet" type="text/css" href="includes/css/style.cfm?colorChoice=#session.style#">
 		<script type="text/javascript">
 			function showOrHidePicker() {
 				picker = document.getElementById("picker");

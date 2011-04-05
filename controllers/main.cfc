@@ -96,7 +96,7 @@
 		*/
 		function color(rc) {
 			param rc.color = "green";
-			session.style = rc.color & "base.css";
+			session.style = rc.color;
 		}
 
 	</cfscript>
