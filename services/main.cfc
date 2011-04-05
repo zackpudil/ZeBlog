@@ -90,7 +90,7 @@
 		* @param user_id - the user's UserID in the users table
 		* @return - passed in blogid
 		*/
-		function commentblog(belogid, text, date, user_id) {
+		function commentblog(blogid, text, date, user_id) {
 			//create a new comment entity.
 			var comment = entityNew("comments");
 
