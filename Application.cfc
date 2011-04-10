@@ -8,7 +8,7 @@ component extends="org.corfield.framework" {
 		this.scriptprotect="all";
 		
 		variables.framework = {
-			unhandledPaths = '/ZeBlog/includes'
+			unhandledPaths = '/ZeBlog/includes,/ZeBlog/tests'
 		};
 
 		public boolean function setupRequest(targetPage) {
