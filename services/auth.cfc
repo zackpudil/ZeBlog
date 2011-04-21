@@ -10,6 +10,9 @@
 		
 		/**
 		* util function to get a hash of the given password and salt.
+		* @param password - the passwor to hash
+		* @param salt - the salt to hash the password with
+		* @return - the hashed password.
 		*/
 		function getHashPass(password, salt) {
 			var hashpass = hash(password & "" & salt, "SHA-512");
@@ -31,16 +34,21 @@
 		* @return - queryObject
 		*/
 		function login(uname, pword) {
+			var ret = structNew();
+			ret.username = arguments.uname;
+			
 			var userArray = ormExecuteQuery("from users where userName=?", [arguments.uname]);
 			if(arrayLen(userArray)) {
 				var user = userArray[1];
 				//hash the users password
 				var hashpass = getHashPass(pword, user.getSalt());
-				return ormExecuteQuery("from users where userName=? and password=?",
+				ret.user = ormExecuteQuery("from users where userName=? and password=?",
 						[arguments.uname, hashpass]);
 			} else {
-				return [];
+				ret.user = [];
 			}
+			
+			return ret;
 		}
 
 		/**
@@ -65,6 +73,14 @@
 			if(arrayLen(checkUser)) {
 				var ret = StructNew();
 				ret.success = false;
+				
+				ret.saveEntries = {
+					firstname = arguments.firstname,
+					lastname = arguments.lastname,
+					username = arguments.username,
+					email = arguments.email
+				};
+				
 				ret.message = 'Username already exists';
 				return ret;
 			} else {

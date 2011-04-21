@@ -26,10 +26,9 @@
 		* @param - rc (request context)
 		*/
 		function startLogin(rc) {
-			if(not structKeyExists(arguments.rc, "uname")
-									or not structKeyExists(arguments.rc, "pword")) {
-					variables.fw.redirect(action='main.index',
-							queryString='message=Invalid+Username+or+Password');
+			if(not structKeyExists(arguments.rc, "uname") or not structKeyExists(arguments.rc, "pword")) {
+				rc.errors = ['Invalid Username and Password'];
+				variables.fw.redirect(action='auth.index', preserve="errors");
 			}
 		}
 
@@ -41,7 +40,7 @@
 		*			action inside the session scope)
 		*/	
 		function endLogin(rc) {
-			var user = arguments.rc.data;
+			var user = arguments.rc.data.user;
 			if(arrayLen(user)) {
 				//if the user has a recordCount, set the
 				//session user_id to the user's userID
@@ -68,8 +67,9 @@
 					variables.fw.redirect(action='main.index');
 				}
 			} else {
-				variables.fw.redirect(action='auth.index', 
-									queryString='message=Invalid+Username+Or+Password');
+				rc.errors = ['Invalid Username or Passowrd'];
+				rc.username = rc.data.username;
+				variables.fw.redirect(action='auth.index', preserve="errors,username");
 			}
 		}
 
@@ -90,6 +90,7 @@
 		* @param - rc(request context)
 		*/
 		function startSignup(rc) {
+			var errors = [];
 			if(not structKeyExists(arguments.rc, "username")
 							or not structKeyExists(arguments.rc, "password")
 							or not structKeyExists(arguments.rc, "confirm")
@@ -102,15 +103,60 @@
 							or not len(arguments.rc.email)
 							or not len(arguments.rc.firstname)
 							or not len(arguments.rc.lastname)) {
-				variables.fw.redirect(action='auth.register', 
-										queryString='message=All+fields+are+required');
+				arrayAppend(errors, "All fields are required");
+				rc.errors = errors;
 				
+				//redirect to the auth.register action, and preserve the errors in the request context variable.
+				variables.fw.redirect(action="auth.register", preserve="errors");
 			}
 
 			//if password and confirm do not match.
 			if(arguments.rc.password != arguments.rc.confirm) {
-				variables.fw.redirect(action='auth.register',
-										queryString='message=Password+confirm+do+not+match');
+				arrayAppend(errors, "Passwords do not match");
+			}
+			
+			//validate username requirments.
+			if(reFind("[^A-Za-z09]", arguments.rc.username)) {
+				arrayAppend(errors, "Usernames must be alphanumeric (not contain any special characters)");
+			}
+			
+			//validate password requirements.
+			if(not reFind("[A-Z]", arguments.rc.password)) {
+				arrayAppend(errors, "Passwords must contain at least one uppercase letter");
+			}
+			
+			if(not reFind("[a-z]", arguments.rc.password)) {
+				arrayAppend(errors, "Passwords must contain at least one lowercase letter");
+			}
+			
+			if(not reFind("[0-9]", arguments.rc.password)) {
+				arrayAppend(errors, "Password must contain at least one number character");
+			}
+			
+			if(not reFind("[^A-Za-z0-9]", arguments.rc.password)) {
+				arrayAppend(errors, "Password must contain at least one non-alphanumeric character");
+			}
+			
+			if(len(arguments.rc.password) < 8) {
+				arrayAppend(errors, "Passwords must be atleast 8 characters long");
+			}
+			
+			//validate email.
+			if(not isValid("email", arguments.rc.email)) {
+				arrayAppend(errors, "Please use a valid email address");
+			}
+			
+			if(arrayLen(errors)) {
+				rc.errors = errors;
+				
+				rc.saveEntries = {
+					firstname = arguments.rc.firstname,
+					lastname = arguments.rc.lastname,
+					email = arguments.rc.email,
+					username = arguments.rc.username
+				};
+				
+				variables.fw.redirect(action="auth.register", preserve="errors,saveEntries");
 			}
 		}
 
@@ -122,11 +168,13 @@
 		*/
 		function endSignup(rc) {
 			if(arguments.rc.data.success) {
-				variables.fw.redirect(action='auth.index',
-							queryString='message=' & arguments.rc.data.message);
+				rc.errors = ['Now log-in'];
+				variables.fw.redirect(action='auth.index', preserve="errors");
 			} else {
-				variables.fw.redirect(action='auth.register',
-							queryString='message=' & arguments.rc.data.message);
+				//if the username already exists, grab the saved entry from the service and have the user try agaoin.
+				rc.errors = ['Username already exists'];
+				rc.saveEntries = rc.data.saveEntries;
+				variables.fw.redirect(action='auth.register', preserve='errors,saveEntries');
 			}
 		}
 
