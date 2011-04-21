@@ -138,10 +138,11 @@
 		* @param rc - (request context)
 		*/
 		function logout(rc) {
+			var style = session.style;
 			structClear(session);
 			session.isAdmin = false;
 			session.logged_in = false;
-			session.style = "greenbase.css";
+			session.style = style;
 			variables.fw.redirect(action='main.index');
 		}
 	</cfscript>

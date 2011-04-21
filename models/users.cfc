@@ -7,6 +7,8 @@ component persistent="true" table="USERS" output="false" {
 				property email;
 				property userName;
 				property password;
+				//add new property of salt to the user entity.
+				property salt;
 
 				//blog children
 				property

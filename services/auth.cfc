@@ -7,6 +7,21 @@
 --->
 <cfcomponent>
 	<cfscript>
+		
+		/**
+		* util function to get a hash of the given password and salt.
+		*/
+		function getHashPass(password, salt) {
+			var hashpass = hash(password & "" & salt, "SHA-512");
+			
+			//hash a thousand times.	
+			for(var i = 0; i <= 1000; i++) {
+				hashpass = hash(hashpass & "" & salt, "SHA-512");
+			}
+			
+			return hashpass;
+		}
+		
 		/**
 		* service for the login action.
 		* return a query result from the users
@@ -16,10 +31,16 @@
 		* @return - queryObject
 		*/
 		function login(uname, pword) {
-			//return an array of user objects with username and password
-			//equal to uname and pword
-			return ormExecuteQuery("from users where userName=? and password=?",
-					[arguments.uname, arguments.pword]);
+			var userArray = ormExecuteQuery("from users where userName=?", [arguments.uname]);
+			if(arrayLen(userArray)) {
+				var user = userArray[1];
+				//hash the users password
+				var hashpass = getHashPass(pword, user.getSalt());
+				return ormExecuteQuery("from users where userName=? and password=?",
+						[arguments.uname, hashpass]);
+			} else {
+				return [];
+			}
 		}
 
 		/**
@@ -52,8 +73,13 @@
 				user.setFirstname(arguments.firstname);
 				user.setLastname(arguments.lastname);
 				user.setEmail(arguments.email);
-				user.setUsername(arguments.username);
-				user.setPassword(arguments.password);
+				user.setUsername(lcase(arguments.username));
+				user.setSalt(createUUid());
+				
+				//hash the password this time, instead of storing it in plain text.
+				var hashpass = getHashPass(password, user.getSalt());
+				
+				user.setPassword(hashpass);
 				entitySave(user);
 				ormflush();
 				//return
