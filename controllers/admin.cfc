@@ -143,14 +143,35 @@
 			if(not structKeyExists(arguments.rc, "id") or not isNumeric(arguments.rc.id)) {
 				variables.fw.redirect(action='admin.moderate',
 								queryString='command=comment&id=' & arguments.rc.blogid & '&message=
-																									Error+while+deleting+comment');
+											Error+while+deleting+comment');
 			}
 		}
 
 		function endDeletecomment(rc) {
 			variables.fw.redirect(action='admin.moderate',
 					queryString='command=comment&id=' & arguments.rc.data & '&message=
-																								Comment+Deleted');
+								Comment+Deleted');
+		}
+		
+		function endManage(rc) {
+			rc.users = rc.data;
+		}
+		
+		function startActivate(rc) {
+			if(not structKeyExists(arguments.rc, "id")) {
+				variables.fw.redirect(action='admin.manage');
+			}
+			
+			
+			if(structKeyExists(arguments.rc, "active")) {
+				rc.activate = 1;
+			} else {
+				rc.activate = 0;
+			}
+		}
+		
+		function endActivate(rc) {
+			variables.fw.redirect(action='admin.manage');
 		}
 	</cfscript>
 

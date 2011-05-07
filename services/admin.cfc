@@ -91,5 +91,15 @@
 			ormFlush();
 			return arguments.blogid;
 		}
+		
+		function manage() {
+			var users = ormExecutequery("from users where userID <> 1");
+			return users;
+		}
+		
+		function activate(id, activate) {
+			var user = entityLoad('users', id, true);
+			user.setActive(activate);
+		}
 	</cfscript>
 </cfcomponent>

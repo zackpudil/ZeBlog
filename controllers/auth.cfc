@@ -26,6 +26,9 @@
 		* @param - rc (request context)
 		*/
 		function startLogin(rc) {
+			param session.tries = 1;
+			
+			rc.tries = session.tries;
 			if(not structKeyExists(arguments.rc, "uname") or not structKeyExists(arguments.rc, "pword")) {
 				rc.errors = ['Invalid Username and Password'];
 				variables.fw.redirect(action='auth.index', preserve="errors");
@@ -67,9 +70,14 @@
 					variables.fw.redirect(action='main.index');
 				}
 			} else {
-				rc.errors = ['Invalid Username or Passowrd'];
+				if(arguments.rc.data.isLockedOut) {
+					rc.errors = ['Account is locked, please contact administrator'];
+				} else {
+					rc.errors = ['Invalid Username or Passowrd'];
+				}	
 				rc.username = rc.data.username;
-				variables.fw.redirect(action='auth.index', preserve="errors,username");
+				session.tries = rc.data.tries;
+				variables.fw.redirect(action='auth.index', preserve="errors,username,tries");
 			}
 		}
 

@@ -33,17 +33,33 @@
 		* @param pword - passed in password of the user
 		* @return - queryObject
 		*/
-		function login(uname, pword) {
+		function login(uname, pword, tries) {
 			var ret = structNew();
 			ret.username = arguments.uname;
+			ret.tries = arguments.tries + 1;
+			ret.isLockedOut = false;
+			ret.user = [];
 			
 			var userArray = ormExecuteQuery("from users where userName=?", [arguments.uname]);
 			if(arrayLen(userArray)) {
 				var user = userArray[1];
 				//hash the users password
 				var hashpass = getHashPass(pword, user.getSalt());
-				ret.user = ormExecuteQuery("from users where userName=? and password=?",
-						[arguments.uname, hashpass]);
+				if(user.getPassword() eq hashpass) {
+					if(user.isActive()) {
+						ret.user = [user];
+					} else {
+						ret.isLockedOut = true;
+					}
+				} else {
+					if(ret.tries >= 3) {
+						if(not user.isAdmin()) {
+							user.setActive(0);
+							entitySave(user);
+							ormflush();
+						}
+					}
+				}
 			} else {
 				ret.user = [];
 			}
@@ -96,6 +112,7 @@
 				var hashpass = getHashPass(password, user.getSalt());
 				
 				user.setPassword(hashpass);
+				user.setActive(1);
 				entitySave(user);
 				ormflush();
 				//return
